@@ -19,8 +19,8 @@ import { AuthUser } from './auth/decorators/auth-user.decorator';
 @UseGuards(WsGuard)
 @WebSocketGateway({
   cors: {
-    origin: process.env.CLIENT_URL!,
-    methods: ['GET', 'POST'],
+    origin: [process.env.CLIENT_URL!],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
   },
 })
