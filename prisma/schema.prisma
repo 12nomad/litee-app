@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum NotifType {
+  FOLLOW
+  LIKE
+  REPLY
+  MESSAGE
+  REPOST
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  username               String  @unique
+  email                  String  @unique
+  password               String
+  name                   String?
+  description            String?
+  profileImage           String?
+  profileBackgroundImage String?
+  followers              User[]  @relation("UserFollows")
+  following              User[]  @relation("UserFollows")
+
+  verification Verification?
+  posts        Post[]
+  likedPosts   Post[]          @relation("PostLikes")
+  repostsUsers Post[]          @relation("RepostUsers")
+  savedPosts   Post[]          @relation("SavedPosts")
+  comments     Comment[]
+  rooms        Room[]
+  messages     Message[]
+  readBy       Message[]       @relation("ReadBy")
+  notifFrom    Notifications[] @relation("NotifFrom")
+  notifTo      Notifications[] @relation("NotifTo")
+  seenBy       Room[]          @relation("SeenBy")
+
+  @@map("users")
+}
+
+model Room {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roomName    String?
+  isGroupRoom Boolean   @default(false)
+  seenBy      User[]    @relation("SeenBy")
+  users       User[]
+  messages    Message[]
+
+  latestMessage Message? @relation(fields: [messageId], references: [id], "LatestMessage")
+  messageId     Int?     @unique
+
+  @@map("rooms")
+}
+
+model Notifications {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  notifType NotifType
+  typeId    Int?
+  viewed    Boolean   @default(false)
+
+  notifFrom   User @relation("NotifFrom", fields: [notifFromId], references: [id])
+  notifFromId Int
+
+  notifTo   User @relation("NotifTo", fields: [notifToId], references: [id])
+  notifToId Int
+
+  @@map("notifications")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  description String
+  media       String?
+  pinned      Boolean @default(false)
+  isRepost    Boolean @default(false)
+
+  likes       User[]    @relation("PostLikes")
+  repostUsers User[]    @relation("RepostUsers")
+  comments    Comment[]
+
+  userSavedPosts   User? @relation("SavedPosts", fields: [userSavedPostsId], references: [id])
+  userSavedPostsId Int?
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
+  repostId Int?
+  repost   Post?  @relation("Repost", fields: [repostId], references: [id], onDelete: Cascade)
+  post     Post[] @relation("Repost")
+
+  @@map("posts")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  comment String
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
+  @@map("comments")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  message  String
+  latestIn Room?  @relation("LatestMessage")
+  readBy   User[] @relation("ReadBy")
+
+  room   Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId Int
+
+  sender   User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId Int
+
+  @@map("messages")
+}
+
+model Verification {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reset String?
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int  @unique
+
+  @@map("verifications")
+}
