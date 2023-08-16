@@ -24,7 +24,7 @@ export class MessagesService {
         roomId,
         senderId: sub,
       },
-      include: { sender: true },
+      include: { sender: true, room: true },
     });
 
     const room = await this.prisma.room.update({

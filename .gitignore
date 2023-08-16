@@ -7,9 +7,6 @@
 .env
 .env.test
 
-# miscellanous
-docker-compose.yml
-
 # Logs
 logs
 *.log
