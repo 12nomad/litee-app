@@ -8,7 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
       // origin: process.env.CLIENT_URL,
-      origin: 'http://localhost:5173',
+      // origin: 'http://localhost:5173',
+      origin: 'https://litee-app.vercel.app',
       credentials: true,
     },
   });

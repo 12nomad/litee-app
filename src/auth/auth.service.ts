@@ -53,8 +53,8 @@ export class AuthService {
     res.cookie('__litee_app_access_token', at, {
       secure: true,
       httpOnly: true,
-      domain: 'localhost',
-      sameSite: 'lax',
+      // domain: 'localhost',
+      domain: '.vercel.app',
     });
   }
 

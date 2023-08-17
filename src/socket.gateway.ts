@@ -20,7 +20,8 @@ import { AuthUser } from './auth/decorators/auth-user.decorator';
 @WebSocketGateway({
   cors: {
     // origin: process.env.CLIENT_URL,
-    origin: 'http://localhost:5173',
+    // origin: 'http://localhost:5173',
+    origin: 'https://litee-app.vercel.app',
     credentials: true,
   },
 })
