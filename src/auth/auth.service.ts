@@ -83,15 +83,16 @@ export class AuthService {
     });
 
     // await this.setToken(user.id, res);
+    const token = await this.jwtService.signAsync(
+      { sub: user.id },
+      {
+        secret: this.configService.get<string>('JWT_PRIVATE'),
+      },
+    );
 
     return {
       success: true,
-      token: await this.jwtService.signAsync(
-        { sub: user.id },
-        {
-          secret: this.configService.get<string>('JWT_PRIVATE'),
-        },
-      ),
+      token,
     };
   }
 
@@ -116,15 +117,17 @@ export class AuthService {
     }
 
     // await this.setToken(user.id, res);
+    const token = await this.jwtService.signAsync(
+      { sub: user.id },
+      {
+        secret: this.configService.get<string>('JWT_PRIVATE'),
+      },
+    );
+    console.log(token);
 
     return {
       success: true,
-      token: await this.jwtService.signAsync(
-        { sub: user.id },
-        {
-          secret: this.configService.get<string>('JWT_PRIVATE'),
-        },
-      ),
+      token,
     };
   }
 
