@@ -51,7 +51,9 @@ export class AuthService {
     );
 
     res.cookie('__litee_app_access_token', at, {
-      sameSite: 'none',
+      domain: '.railway.app',
+      sameSite: 'strict',
+      httpOnly: true,
       secure: true,
     });
   }
