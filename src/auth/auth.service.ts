@@ -51,8 +51,9 @@ export class AuthService {
     );
 
     res.cookie('__litee_app_access_token', at, {
-      secure: true,
       httpOnly: true,
+      sameSite: 'none',
+      domain: this.configService.get<string>('CLIENT_URL'),
     });
   }
 
