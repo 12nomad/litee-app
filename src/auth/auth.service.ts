@@ -52,8 +52,7 @@ export class AuthService {
 
     res.cookie('__litee_app_access_token', at, {
       secure: true,
-      // FIXME: change on deploy
-      domain: this.configService.get<string>('CLIENT_URL'),
+      httpOnly: true,
     });
   }
 
