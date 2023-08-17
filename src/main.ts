@@ -20,6 +20,6 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(Number(process.env.PORT) || 6969, '0.0.0.0');
+  await app.listen(Number(process.env.PORT));
 }
 bootstrap();
