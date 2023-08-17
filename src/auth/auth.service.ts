@@ -54,7 +54,7 @@ export class AuthService {
       httpOnly: true,
       secure: true,
       sameSite: 'lax',
-      domain: '.vercel.app',
+      domain: '.railway.app',
     });
   }
 
