@@ -50,12 +50,7 @@ export class AuthService {
       },
     );
 
-    res.cookie('__litee_app_access_token', at, {
-      sameSite: 'none',
-      secure: true,
-      domain: 'litee-app.vercel.app',
-      httpOnly: true,
-    });
+    res.cookie('__litee_app_access_token', at);
   }
 
   async register(
