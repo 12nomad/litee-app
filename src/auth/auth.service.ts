@@ -42,21 +42,21 @@ export class AuthService {
     return result;
   }
 
-  // async setToken(sub: number, res: Response) {
-  //   const at = await this.jwtService.signAsync(
-  //     { sub },
-  //     {
-  //       secret: this.configService.get<string>('JWT_PRIVATE'),
-  //     },
-  //   );
+  async setToken(sub: number, res: Response) {
+    const at = await this.jwtService.signAsync(
+      { sub },
+      {
+        secret: this.configService.get<string>('JWT_PRIVATE'),
+      },
+    );
 
-  //   res.cookie('__litee_app_access_token', at, {
-  //     secure: true,
-  //     httpOnly: true,
-  //     domain: 'localhost',
-  //     // domain: '.vercel.app',
-  //   });
-  // }
+    res.cookie('__litee_app_access_token', at, {
+      secure: true,
+      httpOnly: true,
+      domain: 'localhost',
+      // domain: '.vercel.app',
+    });
+  }
 
   async register(
     { email, password, username }: RegisterDto,
@@ -82,17 +82,17 @@ export class AuthService {
       },
     });
 
-    // await this.setToken(user.id, res);
-    const token = await this.jwtService.signAsync(
-      { sub: user.id },
-      {
-        secret: this.configService.get<string>('JWT_PRIVATE'),
-      },
-    );
+    await this.setToken(user.id, res);
+    // const token = await this.jwtService.signAsync(
+    //   { sub: user.id },
+    //   {
+    //     secret: this.configService.get<string>('JWT_PRIVATE'),
+    //   },
+    // );
 
     return {
       success: true,
-      token,
+      // token,
     };
   }
 
@@ -116,17 +116,17 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials...');
     }
 
-    // await this.setToken(user.id, res);
-    const token = await this.jwtService.signAsync(
-      { sub: user.id },
-      {
-        secret: this.configService.get<string>('JWT_PRIVATE'),
-      },
-    );
+    await this.setToken(user.id, res);
+    // const token = await this.jwtService.signAsync(
+    //   { sub: user.id },
+    //   {
+    //     secret: this.configService.get<string>('JWT_PRIVATE'),
+    //   },
+    // );
 
     return {
       success: true,
-      token,
+      // token,
     };
   }
 
