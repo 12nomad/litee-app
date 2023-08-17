@@ -52,8 +52,9 @@ export class AuthService {
 
     res.cookie('__litee_app_access_token', at, {
       httpOnly: true,
-      sameSite: 'none',
-      domain: this.configService.get<string>('CLIENT_URL'),
+      secure: true,
+      sameSite: 'lax',
+      domain: '.vercel.app',
     });
   }
 
