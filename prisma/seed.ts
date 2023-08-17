@@ -1,4 +1,5 @@
-import { Post, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import * as argon from 'argon2';
 import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
@@ -83,7 +84,7 @@ async function main() {
         description: faker.person.bio(),
         name: faker.person.fullName(),
         username: faker.internet.userName(),
-        password: 'qwerty123456',
+        password: await argon.hash('qwerty123456'),
         profileImage: faker.image.avatar(),
         profileBackgroundImage: '',
       },
