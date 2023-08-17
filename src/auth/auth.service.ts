@@ -83,38 +83,10 @@ export class AuthService {
     });
 
     // await this.setToken(user.id, res);
-    const token = this.jwtService.sign(
+    const token = await this.jwtService.signAsync(
       { sub: user.id },
       {
-        secret: `
-        -----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAsEpRuFODTtQvWF125Sb6Ml1KRGKfG6TJSiYYwFGLXeggNEKs
-SszoT2rVpvEimJ0Dp1IExZk6Oj+txI1qhAiA5ru8143tgzJ/f6sFt1/1pniwcYe8
-/A85S37ftXayzxmfIgUDIWtRpEx/lXKUJEF+jI4rm7GKlTVVoUIzX/9b02lD9KK8
-w8I09oLNi5x03ssl8S72jfvbbyJO8jchaTpedaeBgSOfMCr1Z7A7UYipwSbCgJco
-Ue9W9/LUGB8dCr/6/3Vv83b98BRLfOOrfguo0CNIud//Bf1onVERyCtOk/hA+EMw
-GxQTtD9tQVNKV1XAFm8v3uBx8NZKuWHJYoOLBwIDAQABAoIBAQCvlTYTespbpyaI
-wn56+flUVGp19iw2okgB3DPmyNEgdOQuaQGldrUi9Gtb3OvySOCstBognN7LyUTP
-cXJXkwifxvjtUGTxuUgX5kTJQYAvkCFc0i8+dgNA2FsEJ/csIn7GqWtWy8cC91ZT
-iU1XVwwt/iQc7BX1SqvA82isAnB4/MBvdoNNKYDhvGB+2dWxngOYeJSW0leM0MNx
-Ul5hdYwUjY7RXO8+hyRNRiURCGQHmpjVcIp32XCyl51nu/mVwlq2cwQh+DKjx1Th
-WzacXEY2xAilVpmhJstvRpkv/fU3ehdixkQRE6UloK+eSUaIOFqZQ8GK0ItRAIrU
-OoPFi3MBAoGBAPoAIqftowe/ZBpadnkvXaPvKdRTozQ/PBt1EbAyIYMjHZXObui6
-QsNRqFGAs6wIdUHCdgdHLt8lrTqaPMGExNlFcpuuwrzbMap+gFTLk6didNLDIe5y
-zTmvX88op9Njtcicbl3mgfdnHceER7s+S+WAGRLWAnDIglpRN6uZQXJHAoGBALSF
-WWB119YoyMUEKZza7FCS8UbYa4AavjxUG6F4qAZObhPU2+n5KiS/92KPOmRv0kvd
-+llyFlEipYuwaK+uYIkI7+BKBV17+ipsWcjz1AMERFPuimzBx3ElpDtTdH6kW/ub
-Sh1oMTrtM6LnK8dBA+Gn88mY51SSJmHzmXnBUsFBAoGBAMnWOCSZ4AjORZRdOs9G
-JXTID15kFByHfRCx6JD3OEU2oZkj7Dkqv+IPWDRNE0IuJfTsefwQRVBVi9EHW0vl
-1EOSJSB57LEqyqNatGNBZLk77ROIBSoNN5F9/H001qH9G3OWkChxhLZoYwuEyaDr
-f70POa8SZzAFQfCHJ8n71nHbAoGAVcyvj05TWMGnsyRoVtoiyaUdsmt4pLmRQ4FC
-ZLvBOMYcQabBI3K+2hq3jQvAWC5hyJdnvw2fl86c2kjtaNq7nUY3JOZpqGYdn/5B
-qmZhlVF43F+bQVfU4G1goqXmz6503aCQWGvGQlitWzb+ssSvAJjgIShgguy3+4RZ
-pOoC2EECgYA49oFqY6Z3Igs+XWRIp5OAhPImfZU0lR6TToUGSAK7L8T5CWFQWbHD
-8SWbGTI7jLPWSlmtNwErdfS9g+KnjFTHuEDHmGkR1aL7UvGTDGJVzEcIJBxHfVbx
-nesmrqA1TwgHpsrpKCRopwVbMrk5syq3WVmZEITOMTr2xmgMoNd9nA==
------END RSA PRIVATE KEY-----
-        `,
+        secret: this.configService.get<string>('JWT_PRIVATE'),
       },
     );
 
@@ -145,38 +117,10 @@ nesmrqA1TwgHpsrpKCRopwVbMrk5syq3WVmZEITOMTr2xmgMoNd9nA==
     }
 
     // await this.setToken(user.id, res);
-    const token = this.jwtService.sign(
+    const token = await this.jwtService.signAsync(
       { sub: user.id },
       {
-        secret: `
-        -----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAsEpRuFODTtQvWF125Sb6Ml1KRGKfG6TJSiYYwFGLXeggNEKs
-SszoT2rVpvEimJ0Dp1IExZk6Oj+txI1qhAiA5ru8143tgzJ/f6sFt1/1pniwcYe8
-/A85S37ftXayzxmfIgUDIWtRpEx/lXKUJEF+jI4rm7GKlTVVoUIzX/9b02lD9KK8
-w8I09oLNi5x03ssl8S72jfvbbyJO8jchaTpedaeBgSOfMCr1Z7A7UYipwSbCgJco
-Ue9W9/LUGB8dCr/6/3Vv83b98BRLfOOrfguo0CNIud//Bf1onVERyCtOk/hA+EMw
-GxQTtD9tQVNKV1XAFm8v3uBx8NZKuWHJYoOLBwIDAQABAoIBAQCvlTYTespbpyaI
-wn56+flUVGp19iw2okgB3DPmyNEgdOQuaQGldrUi9Gtb3OvySOCstBognN7LyUTP
-cXJXkwifxvjtUGTxuUgX5kTJQYAvkCFc0i8+dgNA2FsEJ/csIn7GqWtWy8cC91ZT
-iU1XVwwt/iQc7BX1SqvA82isAnB4/MBvdoNNKYDhvGB+2dWxngOYeJSW0leM0MNx
-Ul5hdYwUjY7RXO8+hyRNRiURCGQHmpjVcIp32XCyl51nu/mVwlq2cwQh+DKjx1Th
-WzacXEY2xAilVpmhJstvRpkv/fU3ehdixkQRE6UloK+eSUaIOFqZQ8GK0ItRAIrU
-OoPFi3MBAoGBAPoAIqftowe/ZBpadnkvXaPvKdRTozQ/PBt1EbAyIYMjHZXObui6
-QsNRqFGAs6wIdUHCdgdHLt8lrTqaPMGExNlFcpuuwrzbMap+gFTLk6didNLDIe5y
-zTmvX88op9Njtcicbl3mgfdnHceER7s+S+WAGRLWAnDIglpRN6uZQXJHAoGBALSF
-WWB119YoyMUEKZza7FCS8UbYa4AavjxUG6F4qAZObhPU2+n5KiS/92KPOmRv0kvd
-+llyFlEipYuwaK+uYIkI7+BKBV17+ipsWcjz1AMERFPuimzBx3ElpDtTdH6kW/ub
-Sh1oMTrtM6LnK8dBA+Gn88mY51SSJmHzmXnBUsFBAoGBAMnWOCSZ4AjORZRdOs9G
-JXTID15kFByHfRCx6JD3OEU2oZkj7Dkqv+IPWDRNE0IuJfTsefwQRVBVi9EHW0vl
-1EOSJSB57LEqyqNatGNBZLk77ROIBSoNN5F9/H001qH9G3OWkChxhLZoYwuEyaDr
-f70POa8SZzAFQfCHJ8n71nHbAoGAVcyvj05TWMGnsyRoVtoiyaUdsmt4pLmRQ4FC
-ZLvBOMYcQabBI3K+2hq3jQvAWC5hyJdnvw2fl86c2kjtaNq7nUY3JOZpqGYdn/5B
-qmZhlVF43F+bQVfU4G1goqXmz6503aCQWGvGQlitWzb+ssSvAJjgIShgguy3+4RZ
-pOoC2EECgYA49oFqY6Z3Igs+XWRIp5OAhPImfZU0lR6TToUGSAK7L8T5CWFQWbHD
-8SWbGTI7jLPWSlmtNwErdfS9g+KnjFTHuEDHmGkR1aL7UvGTDGJVzEcIJBxHfVbx
-nesmrqA1TwgHpsrpKCRopwVbMrk5syq3WVmZEITOMTr2xmgMoNd9nA==
------END RSA PRIVATE KEY-----
-        `,
+        secret: this.configService.get<string>('JWT_PRIVATE'),
       },
     );
     console.log(token);
