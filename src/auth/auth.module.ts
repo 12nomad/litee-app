@@ -12,7 +12,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     JwtModule.register({
       signOptions: {
         algorithm: 'RS256',
-        expiresIn: process.env.ACCESS_TOKEN_TTL,
+        expiresIn: '3d',
       },
       privateKey: process.env.JWT_PRIVATE,
       publicKey: process.env.JWT_PUBLIC,

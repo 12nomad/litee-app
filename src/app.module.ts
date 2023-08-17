@@ -37,6 +37,7 @@ import { SocketModule } from './socket/socket.module';
         GOOGLE_CLIENT_ID: Joi.string().required(),
         GOOGLE_CLIENT_SECRET: Joi.string().required(),
         CLIENT_URL: Joi.string().required(),
+        DIRECT_URL: Joi.string().required(),
       }),
     }),
     MailerModule.forRoot({
