@@ -77,11 +77,11 @@ const randomPost = [
 ];
 
 async function main() {
-  const password = await argon.hash('qwerty123456');
+  const hashed = await argon.hash('qwerty123456');
   for (let i = 0; i < 3; i++) {
     await prisma.user.create({
       data: {
-        password,
+        password: hashed,
         email: faker.internet.email(),
         description: faker.person.bio(),
         name: faker.person.fullName(),
