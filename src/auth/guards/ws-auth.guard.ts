@@ -15,17 +15,11 @@ export class WsGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const client: Socket = context.switchToWs().getClient();
-
     const at = client.handshake.headers.cookie
       .split(';')
       .find((el) => el.trim().startsWith('__litee_app_access_token'));
 
     if (!at) return false;
-
-    // const token = client.handshake.headers[
-    //   '__litee_app_access_token'
-    // ] as string;
-    // if (!token) return false;
 
     const token = at.split('=')[1];
     const data = this.jwtService.verify(token, {
