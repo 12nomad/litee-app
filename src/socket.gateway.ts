@@ -21,7 +21,6 @@ import { AuthUser } from './auth/decorators/auth-user.decorator';
   cors: {
     // origin: process.env.CLIENT_URL,
     // origin: 'http://localhost:5173',
-    // origin: 'https://litee-app.vercel.app',
     origin: 'https://litee-app-client-production.up.railway.app',
     credentials: true,
   },
