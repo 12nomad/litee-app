@@ -10,7 +10,7 @@ async function bootstrap() {
     cors: {
       // origin: process.env.CLIENT_URL,
       // origin: 'http://localhost:5173',
-      origin: 'https://litee-app-client-production.up.railway.app',
+      origin: 'https://litee.up.railway.app',
       credentials: true,
     },
   });
